@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rusty Task</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="header">
+        <h1>TASK MANAGER</h1>
+        
+    </header>
+    <section id="container">
+        <div class="btn">
+            <button id="add-btn">+</button>
+            <p class="intro">Tasks are here to be managed, click this icon to add task........</p>
+        </div>
+        <div id="task-list"></div>
+
+        
+        
+    </section>
+
+
+<!-- add-task modal -->
+
+<div class="modal" id="add-task-modal">
+    <div class="task-detail">
+        <span class="close-modal" id="close-modal">&times;</span>
+        <h2>Add Task</h2>
+        <form id="task-form">
+            <input type="text" name="title" id="title" placeholder="Title" required>
+            <textarea name="description" id="description" placeholder="Description"></textarea>
+            <input type="date" name="date" id="date">
+            <button type="submit" id="add-task-btn">Add Task</button>
+        </form>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
