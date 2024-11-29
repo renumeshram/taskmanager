@@ -7,35 +7,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Accessing elements
     const add_btn = document.getElementById("add-btn");
     const addtask_modal = document.getElementById("add-task-modal")
+    const edittask_modal = document.getElementById("edit-task-modal")
     const close_modal = document.getElementById("close-modal")
+    const eclose_modal = document.getElementById("e-close-modal")
+    const add_task_btn = document.getElementById("add-task-btn")
+    const editTaskForm = document.getElementById('edit-task-form');
 
 
     const closeModals = () =>{
         addtask_modal.style.display = "none";
+        edittask_modal.style.display = "none";
     }
 
     close_modal.addEventListener('click',closeModals);
+
+    eclose_modal.addEventListener('click',closeModals);
 
     add_btn.addEventListener('click', (e)=>{
         e.preventDefault();
         addtask_modal.style.display = "block";
     })
 
-    // addtask_btn.addEventListener('click',(e)=>{
-    //     e.preventDefault();
-    //     console.log('yes');
-        
-    //     const tasktitle = document.getElementById("title").value;
-    //     const taskdescp = document.getElementById("description").value;
-    //     const taskdate = document.getElementById("date").value;
-
-    //     console.log(taskdate,taskdescp,tasktitle);
-    //     resetForm()
-    //     closeModals()
-    // })
-
     function savetask(){
-        localStorage.setItem('task', JSON.stringify(task))
+        localStorage.setItem('task', JSON.stringify(task));
     }
 
     function showtask(){
@@ -97,7 +91,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             taskdate
         }
 
-        task.push(newtask);
+        task.unshift(newtask);
 
         savetask();
 
@@ -114,32 +108,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if(event.target.classList.contains("edit-btn")){
             t = task[index];
             // console.log(t);
-            
-            newtitle = prompt("Edit title", t.tasktitle);
-            newdescrp = prompt("Edit description", t.taskdescp);
-            newdate = prompt("Edit date", t.taskdate);
 
-            
-            
-            if(newtitle && newdescrp && newdate){
-                console.log(newtitle,newdescrp,newdate);
-                t.tasktitle = newtitle;
-                t.taskdescp = newdescrp;
-                t.taskdate = newdate;
+            edittask_modal.style.display = "block";
 
-                // console.log(t);
-                
+            let a =document.getElementById('e-title');
+            let b =document.getElementById('e-description');
+            let c =document.getElementById('e-date');
+            let btn =document.getElementById('edit-task-btn');
+            
+            a.value = t.tasktitle;
+            b.value = t.taskdescp;
+            c.value = t.taskdate;
+            btn.innerText = "Update";
+
+            btn.addEventListener('click', (e)=>{
+                e.preventDefault()
+                console.log(a.value, b.value, c.value);
+                t.tasktitle = a.value;
+                t.taskdescp = b.value;
+                t.taskdate = c.value;
 
                 savetask();
                 showtask();
-
-                alert("Update Done...")
-            }
+                resetForm()
+                closeModals()
+                alert("Update done!");
+                
+            })
         }
 
         if(event.target.classList.contains("delete-btn")){
             // console.log("yez");
-            if(prompt("Do you really wanna delete?")){
+            choice = confirm("Are you sure, You wanna delete?")
+            if(choice){
                 task.splice(index,1);
                 savetask();
                 showtask();
@@ -162,6 +163,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const taskForm = document.getElementById('task-form');
     const task_list = document.getElementById('task-list');
+
 
     if(taskForm){
         taskForm.addEventListener('submit', addtask);
