@@ -218,3 +218,32 @@ header{
 .delete-btn:hover{
     background-color: #b0020b;
 }
+
+@media (width<700px) {
+
+    body{
+        overflow-x: hidden;
+    }
+
+    #add-btn{
+        margin: 7px;
+        font-size: 40px;
+        /* font-weight: 60px; */
+        margin-right: 150px;
+        width: 50px;
+    }
+
+    .intro{
+        font-size: 20px;
+        text-align: center;
+        float: left;
+        margin-left: 0px;
+    }
+
+    #task-list{
+        margin: 40px 19px;
+        padding: 30px;
+    }
+
+    
+}
